@@ -1,9 +1,63 @@
-<!doctype html>
 <html>
-  <head>
-    <title>Placeholder Title</title>
-  </head>
-  <body>
-    <p>Nothing to see here... move along.</p>
-  </body>
+<body>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="sankey_multiple" style="width: 900px; height: 300px;"></div>
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Weight');
+    data.addRows([
+       [ 'Traditional', 'ESG', 10],
+       [ 'Traditional', 'Tenant CX', 40],
+       [ 'Traditional', 'Cybersecurity', 4],
+       [ 'Traditional', 'Blockchain', 1],
+       [ 'Agile', 'Blockchain', 5],
+       [ 'Agile', 'Tenant CX', 20],
+       [ 'Agile', 'Cybersecurity', 5],
+       [ 'Venture', 'Tenant CX', 3],
+       [ 'Venture', 'Blockchain', 4],
+       [ 'Venture', 'Employee Ideas', 3],
+       [ 'Venture', 'ESG', 5],
+       [ 'Tenant CX', 'Resort PropTech', 8],
+       [ 'Tenant CX', 'Data Management', 20],
+       [ 'Tenant CX', 'Smart Building', 35],
+       [ 'Blockchain', 'Data Management', 10],
+       [ 'Cybersecurity', 'Data Management', 9],
+       [ 'ESG', 'Geospatial/Construction Tech', 5],
+       [ 'ESG', 'Smart Building', 10],
+
+    ]);
+    
+    // Colorize
+
+		var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
+                  '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
+
+    // Set chart options
+    var options = {
+      width: 600,
+      height: 400,
+      sankey: {
+        node: {
+          colors: colors
+        },
+        link: {
+          colorMode: 'gradient',
+          colors: colors
+        }
+      }
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    chart.draw(data, options);
+   }
+</script>
+</body>
 </html>
